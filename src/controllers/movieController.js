@@ -16,8 +16,10 @@ router.post('/movie/create', (req, res) => {
 });
 
 router.get('/movie/details/:id', (req, res) => {
+    const movieId = req.params.id;
+    const movie = movieService.getById(movieId);
     
-    res.render('details');
+    res.render('details', { movie });
 
 });
 

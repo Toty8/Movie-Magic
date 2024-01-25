@@ -4,7 +4,7 @@ const movies = [{
     genre: 'TestGenre',
     director: 'TestDirector',
     date: '2024',
-    poster: './img/home-alone.jpeg',
+    poster: 'img/home-alone.jpeg',
     rating: '3',
     description: 'TestDescription'
   }];
@@ -16,4 +16,8 @@ exports.create = (movieData) => {
 
 exports.getAll = () => {
     return movies.slice();
+}
+
+exports.getById = (movieId) => {
+    return movies.find(m => m._id === Number(movieId));
 }
