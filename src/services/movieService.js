@@ -1,17 +1,21 @@
+const Movie = require('../models/Movie');
+
 const movies = [{
     _id: 0,
     title: 'TestTitle',
     genre: 'TestGenre',
     director: 'TestDirector',
-    date: '2024',
+    year: '2024',
     poster: 'img/home-alone.jpeg',
     rating: '3',
     description: 'TestDescription'
   }];
 
-exports.create = (movieData) => {
-    movieData._id = movies[movies.length - 1]._id + 1;
-    movies.push(movieData);
+exports.create = async (movieData) => {
+
+    const result = await Movie.create(movieData);
+
+    return result;
 }
 
 exports.getAll = () => {
@@ -32,7 +36,7 @@ exports.search = (title, genre, year) => {
         result = result.filter(m => m.genre.toLowerCase() === genre.toLowerCase());
     }
     if(year){
-        result = result.filter(m => m.date === year);
+        result = result.filter(m => m.year === year);
     }
 
     return result;
