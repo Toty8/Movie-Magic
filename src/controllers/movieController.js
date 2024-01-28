@@ -21,9 +21,9 @@ router.post('/movie/create', async (req, res) => {
     }
 });
 
-router.get('/movie/details/:id', (req, res) => {
+router.get('/movie/details/:id', async (req, res) => {
     const movieId = req.params.id;
-    const movie = movieService.getById(movieId);
+    const movie = await movieService.getById(movieId).lean();
     
     if(!isNaN(movie.rating)){
         movie.rating = new Array(Number(movie.rating)).fill(true);

@@ -1,33 +1,14 @@
 const Movie = require('../models/Movie');
 
-const movies = [{
-    _id: 0,
-    title: 'TestTitle',
-    genre: 'TestGenre',
-    director: 'TestDirector',
-    year: '2024',
-    poster: 'img/home-alone.jpeg',
-    rating: '3',
-    description: 'TestDescription'
-  }];
 
-exports.create = async (movieData) => {
+exports.create = (movieData) => Movie.create(movieData);
 
-    const result = await Movie.create(movieData);
+exports.getAll = () => Movie.find();
 
-    return result;
-}
+exports.getById = (movieId) => Movie.findById(movieId);
 
-exports.getAll = () => {
-    return movies.slice();
-}
-
-exports.getById = (movieId) => {
-    return movies.find(m => m._id === Number(movieId));
-}
-
-exports.search = (title, genre, year) => {
-    let result = movies.slice();
+exports.search = async (title, genre, year) => {
+    let result = await Movie.find().lean();
 
     if(title){
         result = result.filter(m => m.title.toLowerCase().includes(title.toLowerCase()));
