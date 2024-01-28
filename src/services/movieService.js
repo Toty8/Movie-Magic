@@ -5,7 +5,7 @@ exports.create = (movieData) => Movie.create(movieData);
 
 exports.getAll = () => Movie.find();
 
-exports.getById = (movieId) => Movie.findById(movieId);
+exports.getById = (movieId) => Movie.findById(movieId).populate('casts');
 
 exports.attach = async (movieId, castId) => Movie.findByIdAndUpdate(movieId, {$push: {casts: castId}});
 
