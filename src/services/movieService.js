@@ -7,6 +7,9 @@ exports.getAll = () => Movie.find();
 
 exports.getById = (movieId) => Movie.findById(movieId);
 
+exports.attach = async (movieId, castId) => Movie.findByIdAndUpdate(movieId, {$push: {casts: castId}});
+
+
 exports.search = async (title, genre, year) => {
     let result = await Movie.find().lean();
 

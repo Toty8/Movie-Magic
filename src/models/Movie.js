@@ -40,6 +40,11 @@ const movieSchema = new mongoose.Schema({
             message: (props) => `${props.value} is invalid url for the castImage!`
         }     
     },
+    casts: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Cast',
+        required: false
+    }]
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
