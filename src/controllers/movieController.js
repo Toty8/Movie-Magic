@@ -2,11 +2,11 @@ const router = require('express').Router();
 
 const movieService = require('../services/movieService'); 
 
-router.get('/movie/create', (req, res) => {
+router.get('/create', (req, res) => {
     res.render('create');
 });
 
-router.post('/movie/create', async (req, res) => {
+router.post('/create', async (req, res) => {
 
     const newMovie = req.body;
 
@@ -21,7 +21,7 @@ router.post('/movie/create', async (req, res) => {
     }
 });
 
-router.get('/movie/details/:id', async (req, res) => {
+router.get('/details/:id', async (req, res) => {
     const movieId = req.params.id;
     const movie = await movieService.getById(movieId).lean();
     
