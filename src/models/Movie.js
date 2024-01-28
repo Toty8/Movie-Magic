@@ -33,8 +33,12 @@ const movieSchema = new mongoose.Schema({
     poster: {
         type: String,
         required: true,
-        match: /^https?:\/\//
-    },
+        validate: {
+            validator(value) {
+                return /^https?:\/\//.test(value);
+            },
+            message: (props) => `${props.value} is invalid url for the castImage!`
+        }     },
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
