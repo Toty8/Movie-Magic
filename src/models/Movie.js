@@ -38,7 +38,8 @@ const movieSchema = new mongoose.Schema({
                 return /^https?:\/\//.test(value);
             },
             message: (props) => `${props.value} is invalid url for the castImage!`
-        }     },
+        }     
+    },
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
