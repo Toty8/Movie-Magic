@@ -29,13 +29,14 @@ router.post('/create', isAuth, async (req, res) => {
 router.get('/details/:id', async (req, res) => {
     const movieId = req.params.id;
     const movie = await movieService.getById(movieId).lean();
-    const isOwner = movie.owner == req.user._id; 
+    const isOwner = movie.owner == req.user?._id; 
+    const isAuthenticated = !!req.user;
     
     if(!isNaN(movie.rating)){
         movie.rating = new Array(Number(movie.rating)).fill(true);
     }    
 
-    res.render('movie/details', { movie, isOwner });
+    res.render('movie/details', { movie, isOwner, isAuthenticated });
 });
 
 router.get('/:movieId/attach', isAuth, async (req, res) => {
