@@ -31,7 +31,7 @@ router.get('/details/:id', async (req, res) => {
         movie.rating = new Array(Number(movie.rating)).fill(true);
     }    
 
-    res.render('details', { movie });
+    res.render('movie/details', { movie });
 });
 
 router.get('/:movieId/attach', isAuth, async (req, res) => {
