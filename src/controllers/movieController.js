@@ -59,7 +59,7 @@ router.get('/:movieId/edit', isAuth, async (req, res) => {
 
     const movie = await movieService.getById(req.params.movieId).lean();
 
-     res.render('movie/edit', { movie });
+    res.render('movie/edit', { movie });
 });
 
 router.post('/:movieId/edit', isAuth, async (req, res) => {
