@@ -29,7 +29,7 @@ router.post('/create', isAuth, async (req, res) => {
 router.get('/details/:id', async (req, res) => {
     const movieId = req.params.id;
     const movie = await movieService.getById(movieId).lean();
-    const isOwner = movie.owner == req.user?._id; 
+    const isOwner = movie.owner && movie.owner == req.user?._id; 
     const isAuthenticated = !!req.user;
     
     if(!isNaN(movie.rating)){
@@ -57,13 +57,27 @@ router.post('/:movieId/attach', isAuth, async (req, res) => {
 
 router.get('/:movieId/edit', isAuth, async (req, res) => {
 
-    if(!req.user){
-        return res.redirect('/auth/login');
-    }
-
     const movie = await movieService.getById(req.params.movieId).lean();
 
      res.render('movie/edit', { movie });
+});
+
+router.post('/:movieId/edit', isAuth, async (req, res) => {
+
+    const editedMovie = req.body;
+
+    await movieService.edit(req.params.movieId, editedMovie);
+
+    res.redirect(`movie/details/${req.params.movieId}`);
+});
+
+
+router.get('/:movieId/delete', isAuth, async (req, res) => {
+
+    await movieService.delete(req.params.movieId);
+
+    res.redirect('/');
+
 });
 
 
