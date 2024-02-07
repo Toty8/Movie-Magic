@@ -3,22 +3,28 @@ const mongoose = require('mongoose');
 const movieSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        minLenth: 5,
+        match: [/^[a-zA-Z0-9]+$/, 'Invalid title!'],
     },
     genre: {
         type: String,
         required: true,
-        lowercase: true
+        lowercase: true,
+        minLenth: 5,
+        match: [/^[a-zA-Z0-9]+$/, 'Invalid genre!'],
     },
     director: {
         type: String,
-        required: true
+        required: true,
+        minLenth: 5,
+        match: [/^[a-zA-Z0-9\s]+$/, 'Invalid director!'],
     },
     year: {
         type: Number,
         required: true,
         min: 1900,
-        max: 2030
+        max: 2024
     },
     rating: {
         type: Number,
